@@ -17,3 +17,25 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '# Write your powershell commands here.
+      
+      Install-Module -Name SignPath
+      Submit-SigningRequest `
+        -InputArtifactPath ''SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'' `
+        -CIUserToken ''$($env:CIUserToken)'' `
+        -OrganizationId ''b5c891d7-d62e-4abb-9b2d-0134612e1b1a'' `
+        -ProjectName ''SignPathTestProject'' `
+        -SigningPolicyName ''test-signing'' `
+        -OutputArtifactPath ''/signed/SignPathTestProject.signed.dll'' `
+        -WaitForCompletion
+      
+      # Use the environment variables input below to pass secret variables to this script.'
