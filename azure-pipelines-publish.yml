@@ -21,11 +21,19 @@ steps:
 
       $signedArtifactLink = $jsonResponse.signedArtifactLink
 
-      $outFile = Join-Path ${env:Build.SourcesDirectory} temp
+      $outFile = Join-Path ${env:Build.ArtifactStagingDirectory} SignPathTestProject.dll
       Invoke-WebRequest -Uri $signedArtifactLink -OutFile $outFile -Headers $headers'
   env:
     ORGID: $(OrganizationId)
     SRID: $(SigningRequestId)
     CIUSERTOKEN: $(CIUserToken)
 
-
+- task: GitHubRelease@0
+  inputs:
+    gitHubConnection: drauch
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'auto'
+    title: '$(Build.SourceVersion)'
+    isPreRelease: true
