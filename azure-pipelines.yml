@@ -30,8 +30,9 @@ steps:
       
       Install-Module -Name SignPath -Scope CurrentUser -Force
 
-      Write-Host $env.CIUSERTOKEN
-      Write-Host ''$env.CIUSERTOKEN''
+      Write-Host $env:CIUSERTOKEN
+      Write-Host "$env:CIUSERTOKEN"
+      Write-Host ''$env:CIUSERTOKEN''
 
       Submit-SigningRequest `
         -InputArtifactPath ''SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'' `
