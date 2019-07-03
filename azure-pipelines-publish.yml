@@ -11,7 +11,7 @@ pool:
 
 steps:
 - script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  displayName: 'Here we would download the artifact from the SignPath API and publish it to GitHub releases or somewhere'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
