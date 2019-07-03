@@ -29,6 +29,7 @@ steps:
     script: '# Write your powershell commands here.
       
       Install-Module -Name SignPath
+
       Submit-SigningRequest `
         -InputArtifactPath ''SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'' `
         -CIUserToken ''$($env:CIUserToken)'' `
@@ -39,3 +40,5 @@ steps:
         -WaitForCompletion
       
       # Use the environment variables input below to pass secret variables to this script.'
+  env:
+    CIUserToken: $(CIUserToken)
