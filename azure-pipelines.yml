@@ -36,7 +36,7 @@ steps:
         -OrganizationId "b5c891d7-d62e-4abb-9b2d-0134612e1b1a" `
         -ProjectName "SignPathTestProject" `
         -SigningPolicyName "test-signing" `
-        -OutputArtifactPath "$env:BUILD_ARTIFACTSTAGINGDIRECTORY" `
+        -OutputArtifactPath "$env:BUILD_ARTIFACTSTAGINGDIRECTORY/SignPathTestProject.dll" `
         -WaitForCompletion
       
       # Use the environment variables input below to pass secret variables to this script.'
@@ -45,5 +45,5 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)/SignPathTestProject.signed.dll'
+    targetPath: '$(Build.ArtifactStagingDirectory)/SignPathTestProject.dll'
     artifact: 'SignPathTestProject Library'
