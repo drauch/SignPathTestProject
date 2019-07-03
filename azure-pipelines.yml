@@ -28,7 +28,7 @@ steps:
     targetType: 'inline'
     script: '# Write your powershell commands here.
       
-      Install-Module -Name SignPath
+      Install-Module -Name SignPath -Scope CurrentUser -Force
 
       Submit-SigningRequest `
         -InputArtifactPath ''SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'' `
