@@ -10,10 +10,22 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Here we would download the artifact from the SignPath API and publish it to GitHub releases or somewhere'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '
+      $headers = @{"Authorization" = "Bearer $env:CIUSERTOKEN"}
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+      $signingRequestUrl = "https://app.signpath.io/Api/v1/$env:ORGID/SigningRequests/$env:SRID";
+      $jsonResponse = ConvertFrom-Json (Invoke-WebRequest -Uri $signingRequestUrl -Headers $headers)
+
+      $signedArtifactLink = $jsonResponse.signedArtifactLink
+
+      $outFile = Join-Path ${env:Build.SourcesDirectory} temp
+      Invoke-WebRequest -Uri $signedArtifactLink -OutFile $outFile -Headers $headers'
+  env:
+    ORGID: $(OrganizationId)
+    SRID: $(SigningRequestId)
+    CIUSERTOKEN: $(CIUserToken)
+
+
