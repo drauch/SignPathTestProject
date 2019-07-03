@@ -30,19 +30,20 @@ steps:
       
       Install-Module -Name SignPath -Scope CurrentUser -Force
 
-      Write-Host $env:CIUSERTOKEN
-      Write-Host "$env:CIUSERTOKEN"
-      Write-Host ''$env:CIUSERTOKEN''
-
       Submit-SigningRequest `
-        -InputArtifactPath ''SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'' `
+        -InputArtifactPath "SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll" `
         -CIUserToken "$env:CIUSERTOKEN" `
-        -OrganizationId ''b5c891d7-d62e-4abb-9b2d-0134612e1b1a'' `
-        -ProjectName ''SignPathTestProject'' `
-        -SigningPolicyName ''test-signing'' `
-        -OutputArtifactPath ''/signed/SignPathTestProject.signed.dll'' `
+        -OrganizationId "b5c891d7-d62e-4abb-9b2d-0134612e1b1a" `
+        -ProjectName "SignPathTestProject" `
+        -SigningPolicyName "test-signing" `
+        -OutputArtifactPath "$env:BUILD_ARTIFACTSTAGINGDIRECTORY/" `
         -WaitForCompletion
       
       # Use the environment variables input below to pass secret variables to this script.'
   env:
     CIUSERTOKEN: $(CIUserToken)
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/SignPathTestProject.signed.dll'
+    artifact: 'SignPathTestProject Library'
