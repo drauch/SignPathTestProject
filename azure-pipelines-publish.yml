@@ -14,16 +14,17 @@ steps:
   inputs:
     targetType: 'inline'
     script: '
-      $headers = @{"Authorization" = "Bearer $env:CIUSERTOKEN"}
+      $headers = @{"Authorization" = "Bearer $env:CIUSERTOKEN"};
 
-      $signingRequestUrl = "https://app.signpath.io/Api/v1/$env:ORGID/SigningRequests/$env:SRID"
-      Write-Host "Obtaining information from $signingRequestUrl"
-      $jsonResponse = ConvertFrom-Json (Invoke-WebRequest -Uri $signingRequestUrl -Headers $headers)
+      $signingRequestUrl = "https://app.signpath.io/Api/v1/$env:ORGID/SigningRequests/$env:SRID";
+      
+      Write-Host "Obtaining information from $signingRequestUrl";
+      $jsonResponse = ConvertFrom-Json (Invoke-WebRequest -Uri $signingRequestUrl -Headers $headers);
 
-      $signedArtifactLink = $jsonResponse.signedArtifactLink
-      Write-Host "Obtaining artifact from $signedArtifactLink"
-      $outFile = Join-Path ${env:Build.ArtifactStagingDirectory} SignPathTestProject.dll
-      Invoke-WebRequest -Uri $signedArtifactLink -OutFile $outFile -Headers $headers'
+      $signedArtifactLink = $jsonResponse.signedArtifactLink;
+      Write-Host "Obtaining artifact from $signedArtifactLink";
+      $outFile = Join-Path ${env:Build.ArtifactStagingDirectory} SignPathTestProject.dll;
+      Invoke-WebRequest -Uri $signedArtifactLink -OutFile $outFile -Headers $headers;'
   env:
     ORGID: $(OrganizationId)
     SRID: $(SigningRequestId)
