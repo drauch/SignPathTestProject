@@ -30,24 +30,13 @@ steps:
     SRID: $(SigningRequestId)
     CIUSERTOKEN: $(CIUserToken)
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: '
-      git config user.email "azurepipelines@microsoft.com";
-      git config user.name "Azure Pipelines";
-      git checkout master;
-      git tag -a $env:BUILD_SOURCEVERSION -m ''Release $env:BUILD_SOURCEVERSION'';
-      git push --follow-tags;
-      '
-
 - task: GitHubRelease@0
   inputs:
     gitHubConnection: drauch_3
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'auto'
+    tagSource: 'manual'
     tag: '$(Build.SourceVersion)'
     title: '$(Build.SourceVersion)'
     isPreRelease: true
