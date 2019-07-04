@@ -23,7 +23,7 @@ steps:
 
       $signedArtifactLink = $jsonResponse.signedArtifactLink;
       Write-Host "Obtaining artifact from $signedArtifactLink";
-      $outFile = Join-Path ${env:Build.ArtifactStagingDirectory} SignPathTestProject.dll;
+      $outFile = Join-Path $env:BUILD_ARTIFACTSTAGINGDIRECTORY SignPathTestProject.dll;
       Invoke-WebRequest -Uri $signedArtifactLink -OutFile $outFile -Headers $headers;'
   env:
     ORGID: $(OrganizationId)
