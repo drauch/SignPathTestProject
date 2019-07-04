@@ -36,6 +36,7 @@ steps:
     script: '
       git config user.email "azurepipelines@microsoft.com";
       git config user.name "Azure Pipelines";
+      git checkout master;
       git tag -a $env:BUILD_SOURCEVERSION -m ''Release $env:BUILD_SOURCEVERSION'';
       git push --follow-tags;
       '
