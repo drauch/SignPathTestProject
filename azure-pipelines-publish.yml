@@ -30,6 +30,12 @@ steps:
     SRID: $(SigningRequestId)
     CIUSERTOKEN: $(CIUserToken)
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '
+      git tag $env:BUILD_SOURCEVERSION'
+
 - task: GitHubRelease@0
   inputs:
     gitHubConnection: drauch_3
