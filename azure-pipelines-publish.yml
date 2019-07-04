@@ -16,7 +16,7 @@ steps:
     script: '
       $headers = @{"Authorization" = "Bearer $env:CIUSERTOKEN"}
 
-      $signingRequestUrl = "https://app.signpath.io/Api/v1/$env:ORGID/SigningRequests/$env:SRID";
+      $signingRequestUrl = "https://app.signpath.io/Api/v1/$env:ORGID/SigningRequests/$env:SRID"
       Write-Host "Obtaining information from $signingRequestUrl"
       $jsonResponse = ConvertFrom-Json (Invoke-WebRequest -Uri $signingRequestUrl -Headers $headers)
 
