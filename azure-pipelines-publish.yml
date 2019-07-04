@@ -34,7 +34,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: '
-      git tag $env:BUILD_SOURCEVERSION'
+      git tag -a $env:BUILD_SOURCEVERSION -m ''Release $env:BUILD_SOURCEVERSION'';
+      git push --follow-tags;
+      '
 
 - task: GitHubRelease@0
   inputs:
