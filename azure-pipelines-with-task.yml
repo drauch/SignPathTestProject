@@ -22,7 +22,7 @@ steps:
     projectName: 'SignPathTestProject'
     signingPolicyName: 'test-signing'
     outputArtifactPath: '$env:BUILD_ARTIFACTSTAGINGDIRECTORY/SignPathTestProject.dll'
-    ciUserToken: '$env:CIUSERTOKEN'
+    ciUserToken: '$(CIUSERTOKEN)'
   env:
     CIUSERTOKEN: $(CIUserToken)
 
