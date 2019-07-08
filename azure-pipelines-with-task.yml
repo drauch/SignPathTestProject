@@ -1,0 +1,31 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# trigger:
+# - master
+
+pool:
+  name: 'Dominik''s Pool'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+
+- task: SignPath@0
+  inputs:
+    inputArtifactPath: 'SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'
+    organizationId: 'b5c891d7-d62e-4abb-9b2d-0134612e1b1a'
+    projectName: 'SignPathTestProject'
+    signingPolicyName: 'test-signing'
+    outputArtifactPath: '$env:BUILD_ARTIFACTSTAGINGDIRECTORY/SignPathTestProject.dll'
+    ciUserToken: '$env:CIUSERTOKEN'
+  env:
+    CIUSERTOKEN: $(CIUserToken)
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/SignPathTestProject.dll'
+    artifact: 'SignPathTestProject Library'
