@@ -21,7 +21,7 @@ steps:
     organizationId: 'b5c891d7-d62e-4abb-9b2d-0134612e1b1a'
     projectName: 'SignPathTestProject'
     signingPolicyName: 'test-signing'
-    outputArtifactPath: '$(BUILD_ARTIFACTSTAGINGDIRECTORY)/SignPathTestProject.dll'
+    outputArtifactPath: '$(Build.ArtifactStagingDirectory)/SignPathTestProject.dll'
     ciUserToken: '$(CIUSERTOKEN)'
   env:
     CIUSERTOKEN: $(CIUserToken)
