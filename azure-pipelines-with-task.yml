@@ -15,16 +15,18 @@ steps:
     command: 'build'
     projects: '**/*.csproj'
 
-- task: SignPath@0
+- task: SignPathSubmitSigningRequest@0
   inputs:
+    waitForCompletion: 'sync'
     inputArtifactPath: 'SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'
     organizationId: 'b5c891d7-d62e-4abb-9b2d-0134612e1b1a'
     projectName: 'SignPathTestProject'
     signingPolicyName: 'test-signing'
     outputArtifactPath: '$(Build.ArtifactStagingDirectory)/SignPathTestProject.dll'
-    ciUserToken: '$(CIUSERTOKEN)'
-  env:
-    CIUSERTOKEN: $(CIUserToken)
+    allowOverwriting: false
+    ciUserToken: '$(CIUserToken)'
+    inputArtifactDescription: 'test desc'
+    apiUrl: 'https://app.signpath.io/api/'
 
 - task: PublishPipelineArtifact@1
   inputs:
