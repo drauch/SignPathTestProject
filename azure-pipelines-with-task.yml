@@ -31,7 +31,7 @@ steps:
 - task: SignPathSubmitSigningRequest@0
   inputs:
     waitForCompletion: 'async'
-    inputArtifactPath: 'SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dl'
+    inputArtifactPath: 'SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'
     organizationId: 'b5c891d7-d62e-4abb-9b2d-0134612e1b1a'
     projectName: 'SignPathTestProject'
     signingPolicyName: 'test-signing'
