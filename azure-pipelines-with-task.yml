@@ -14,6 +14,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      Get-PSRepository
+      Write-Host '---'
       Import-Module -Name SignPath -MinimumVersion 1.2.0 -MaximumVersion 1.2.0 -Scope Local -Force
 
 
