@@ -19,7 +19,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Install-Module SignPath
+      Import-Module -Name SignPath -MinimumVersion 1.2.0 -MaximumVersion 1.2.0 -Scope Local -Force
 
 - task: SignPathSubmitSigningRequest@0
   inputs:
