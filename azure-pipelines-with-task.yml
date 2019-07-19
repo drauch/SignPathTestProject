@@ -10,15 +10,6 @@ pool:
   vmImage: 'windows-2019'
 
 steps:
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      Get-PSRepository
-      Write-Host '---'
-      Install-Module -Name SignPath -MinimumVersion 1.2.0 -MaximumVersion 1.2.0 -Scope CurrentUser -Force
-
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
