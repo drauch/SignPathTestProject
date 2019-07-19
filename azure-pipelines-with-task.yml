@@ -14,8 +14,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Register-PSRepository -Name PSGallery -SourceLocation https://www.powershellgallery.com/api/v2
-      Import-Module -Repository PSGallery -Name SignPath -MinimumVersion 1.2.0 -MaximumVersion 1.2.0 -Scope Local -Force
+      Register-PSRepository -Default
+      Import-Module -Name SignPath -MinimumVersion 1.2.0 -MaximumVersion 1.2.0 -Scope Local -Force
 
 
 - task: DotNetCoreCLI@2
