@@ -15,7 +15,7 @@ steps:
     command: 'build'
     projects: '**/*.csproj'
 
-- task: SignPathSubmitSigningRequest@0
+- task: SignPathSubmitSigningRequest@1
   inputs:
     waitForCompletion: 'sync'
     inputArtifactPath: 'SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'
@@ -28,7 +28,7 @@ steps:
     inputArtifactDescription: 'test desc'
     apiUrl: 'https://app.signpath.io/api/'
 
-- task: SignPathSubmitSigningRequest@0
+- task: SignPathSubmitSigningRequest@1
   inputs:
     waitForCompletion: 'async'
     inputArtifactPath: 'SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll'
@@ -40,7 +40,7 @@ steps:
     ciUserToken: '$(CIUserToken)'
     apiUrl: 'https://app.signpath.io/api/'
 
-- task: SignPathDownloadSignedArtifact@0
+- task: SignPathDownloadSignedArtifact@1
   inputs:
     organizationId: 'b5c891d7-d62e-4abb-9b2d-0134612e1b1a'
     signingRequestId: '$(SigningRequestId)'
