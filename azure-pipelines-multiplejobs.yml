@@ -6,9 +6,6 @@
 trigger:
 - master
 
-pool:
-  name: 'Dominik''s Pool'
-
 jobs:
 - job: job1
   pool: 'Azure Pipelines'
