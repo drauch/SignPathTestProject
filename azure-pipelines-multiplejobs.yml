@@ -9,41 +9,15 @@ trigger:
 pool:
   name: 'Dominik''s Pool'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+- job: job1
+  pool: 'Azure Pipelines'
+  steps:
+  - script: echo Hello, world 111!
+    displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: '# Write your powershell commands here.
-      
-      Install-Module -Name SignPath -Scope CurrentUser -Force
-
-      Submit-SigningRequest `
-        -InputArtifactPath "SignPathTestProject/bin/Debug/netstandard2.0/SignPathTestProject.dll" `
-        -CIUserToken "$env:CIUSERTOKEN" `
-        -OrganizationId "b5c891d7-d62e-4abb-9b2d-0134612e1b1a" `
-        -ProjectName "SignPathTestProject" `
-        -SigningPolicyName "test-signing" `
-        -OutputArtifactPath "$env:BUILD_ARTIFACTSTAGINGDIRECTORY/SignPathTestProject.dll" `
-        -WaitForCompletion
-      
-      # Use the environment variables input below to pass secret variables to this script.'
-  env:
-    CIUSERTOKEN: $(CIUserToken)
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)/SignPathTestProject.dll'
-    artifact: 'SignPathTestProject Library'
+- job: job2
+  pool: 'Dominik''s Pool'
+  steps:
+  - script: echo Hello, world 222!
+    displayName: 'Run a one-line script'
